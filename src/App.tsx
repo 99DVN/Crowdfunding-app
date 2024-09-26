@@ -120,7 +120,7 @@ function App() {
   }, [walletProvider]);
   return (
     <MainLayout>
-      <div className="flex justify-start items-center gap-2 pt-4">
+      <div className="flex justify-start items-center gap-4 mt-4 pb-4 boder-b">
         <div className="space-y-2 w-[30%]">
           <Card>
             <h2 className="text-sm font-semibold text-lime-950">

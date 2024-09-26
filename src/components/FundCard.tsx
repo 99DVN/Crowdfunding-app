@@ -11,6 +11,7 @@ import { useWeb3ModalProvider } from "@web3modal/ethers/react";
 import Button from "./Button";
 import { LoaderCircle } from "lucide-react";
 import { shortenAddress } from "../lib/utils";
+import Social from "./Social";
 
 interface FundCradProps {
   fetchContractData: () => void;
@@ -53,9 +54,10 @@ const FundCard = ({ fetchContractData }: FundCradProps) => {
     setAmountfund(Number(e.target.value));
   };
   return (
-    <Card className="p-4 border shadow-lg rounded-lg h-fit w-[70%] space-y-2 py-10 relative overflow-hidden">
+    <Card className="p-4 border shadow-lg rounded-lg h-fit w-[70%] space-y-2 py-7 relative overflow-hidden">
       {!isLoading && (
         <>
+          <Social />
           <h2 className="text-xl font-semibold p-2 text-lime-950">
             Donate your Ether
           </h2>
