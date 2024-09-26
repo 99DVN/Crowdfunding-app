@@ -57,7 +57,7 @@ const FundCard = ({ fetchContractData }: FundCradProps) => {
       {!isLoading && (
         <>
           <h2 className="text-lg font-semibold p-2">Donate your Ether</h2>
-          <div className="space-y-2">
+          <div className="space-y-2 flex gap-2">
             <input
               placeholder="Amount"
               className="border p-2 rounded-3xl text-sm"
