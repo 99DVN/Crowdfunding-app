@@ -15,7 +15,7 @@ const Header = () => {
           <a
             href={`https://sepolia.etherscan.io/address/${ContractAddress}`}
             target="_blank"
-            className="text-l hover:bg-gray-600 p-1 rounded-2xl flex items-center gap-2  text-blue-900"
+            className="text-l hover:bg-gray-200 p-1 rounded-2xl flex items-center gap-2  text-blue-900"
           >
             {shortenAddress(ContractAddress)}
             <ExternalLink className="w-3 h-3" />

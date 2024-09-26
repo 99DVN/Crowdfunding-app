@@ -56,15 +56,20 @@ const FundCard = ({ fetchContractData }: FundCradProps) => {
     <Card className="w-[70%] py-8 px-4 space-x-2">
       {!isLoading && (
         <>
-          <h2 className="text-lg font-semibold p-2">Donate your Ether</h2>
-          <div className="space-y-2 flex gap-2">
+          <h2 className="text-lg font-semibold p-2 text-lime-950">
+            Donate your Ether
+          </h2>
+          <div className="space-x-2 flex ">
             <input
               placeholder="Amount"
               className="border p-2 rounded-3xl text-sm"
               type="number"
               onChange={onInputAmountChange}
             />
-            <Button className="w-fit" onClick={() => handleFunToCrowdfunding()}>
+            <Button
+              className="w-fit m-none"
+              onClick={() => handleFunToCrowdfunding()}
+            >
               Funders
             </Button>
           </div>
