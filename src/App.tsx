@@ -123,21 +123,22 @@ function App() {
       <div className="flex justify-start items-center gap-2 pt-4">
         <div className="space-y-2 w-[30%]">
           <Card>
-            <h2 className="text-lg font-semibold text-lime-950">
+            <h2 className="text-sm font-semibold text-lime-950">
               Total Amount Funding
             </h2>
             {isLoading && <LoaderCircle className="animate-spin" />}
             {!isLoading && crowdfundingBal && (
-              <p className="text-3xl font-bold">
-                {crowdfundingBal} <span className="text-base">ETH</span>
+              <p className="text-2xl font-bold">
+                {crowdfundingBal}{" "}
+                <span className="text-base font-semibold">ETH</span>
               </p>
             )}
           </Card>
           <Card>
-            <h2 className="text-lg font-semibold text-lime-950">Funders</h2>
+            <h2 className="text-sm font-semibold text-lime-950">Funders</h2>
             {isLoading && <LoaderCircle className="animate-spin" />}
             {!isLoading && funderLength && (
-              <p className="text-3xl font-bold">{funderLength}</p>
+              <p className="text-2xl font-bold">{funderLength}</p>
             )}
           </Card>
         </div>

@@ -53,10 +53,10 @@ const FundCard = ({ fetchContractData }: FundCradProps) => {
     setAmountfund(Number(e.target.value));
   };
   return (
-    <Card className="w-[70%] py-8 px-4 space-x-2">
+    <Card className="p-4 border shadow-lg rounded-lg h-fit w-[70%] space-y-2 py-10 relative overflow-hidden">
       {!isLoading && (
         <>
-          <h2 className="text-lg font-semibold p-2 text-lime-950">
+          <h2 className="text-xl font-semibold p-2 text-lime-950">
             Donate your Ether
           </h2>
           <div className="space-x-2 flex ">
