@@ -5,7 +5,12 @@ import {
   useWeb3ModalProvider,
 } from "@web3modal/ethers/react";
 import { contractABI, ContractAddress } from "./contracts/contractData";
-import { BrowserProvider, Contract, formatEther } from "ethers";
+import {
+  AlchemyProvider,
+  BrowserProvider,
+  Contract,
+  formatEther,
+} from "ethers";
 import { useEffect, useState } from "react";
 import { MainLayout } from "./layouts/MainLayout";
 import Card from "./components/Card";
@@ -60,44 +65,51 @@ function App() {
   const [historyEvent, setHistoryEvent] = useState<FundedEvent[] | null>(null);
 
   const fetchContractData = async () => {
+    setIsLoading(true);
     try {
+      let ethersProvider: BrowserProvider | AlchemyProvider;
       if (walletProvider) {
-        const ethersProvider = new BrowserProvider(walletProvider);
-        const contract = new Contract(
-          ContractAddress,
-          contractABI,
-          ethersProvider
+        ethersProvider = new BrowserProvider(walletProvider);
+      } else {
+        ethersProvider = new AlchemyProvider(
+          "sepolia",
+          import.meta.env.VITE_ETH_SEPOLIA_APIKEY
         );
-        const contractBalance =
-          await ethersProvider.getBalance(ContractAddress);
-
-        const responseFunderLength = await contract.getFundersLength();
-
-        const fundedFilter = contract.filters.Funded;
-
-        const fundedEvends = await contract.queryFilter(fundedFilter, 10000);
-
-        const fundedEventFormated: FundedEvent[] = [];
-
-        for (let i = 0; i < fundedEvends.length; i++) {
-          const currentEvent = fundedEvends[i];
-
-          const eventObj: FundedEvent[] = {
-            blockNumber: currentEvent.blockNumber,
-            txHash: currentEvent.transactionHash,
-            funder: (currentEvent as any).args[0],
-            value: formatEther((currentEvent as any).args[1]),
-          };
-          fundedEventFormated.push(eventObj);
-        }
-        fundedEventFormated.sort((a, b) => b.blockNumber - a.blockNumber);
-
-        setHistoryEvent(fundedEventFormated);
-
-        setCrowdfundingBal(formatEther(contractBalance));
-
-        setFunderLength(Number(responseFunderLength));
       }
+
+      const contract = new Contract(
+        ContractAddress,
+        contractABI,
+        ethersProvider
+      );
+      const contractBalance = await ethersProvider.getBalance(ContractAddress);
+
+      const responseFunderLength = await contract.getFundersLength();
+
+      const fundedFilter = contract.filters.Funded;
+
+      const fundedEvends = await contract.queryFilter(fundedFilter, 10000);
+
+      const fundedEventFormated: FundedEvent[] = [];
+
+      for (let i = 0; i < fundedEvends.length; i++) {
+        const currentEvent = fundedEvends[i];
+
+        const eventObj: FundedEvent[] = {
+          blockNumber: currentEvent.blockNumber,
+          txHash: currentEvent.transactionHash,
+          funder: (currentEvent as any).args[0],
+          value: formatEther((currentEvent as any).args[1]),
+        };
+        fundedEventFormated.push(eventObj);
+      }
+      fundedEventFormated.sort((a, b) => b.blockNumber - a.blockNumber);
+
+      setHistoryEvent(fundedEventFormated);
+
+      setCrowdfundingBal(formatEther(contractBalance));
+
+      setFunderLength(Number(responseFunderLength));
     } finally {
       setIsLoading(false);
     }
