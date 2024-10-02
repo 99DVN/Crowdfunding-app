@@ -1,4 +1,4 @@
-export const ContractAddress = "0x0fBd1Bcb43B42f8CBc1349D012cbB940bf8Cf10B";
+export const ContractAddress = "0x4f100E5bCbd266E6c3CaA53f8c0efeD90F4565d5";
 
 export const contractABI = [
   {
@@ -8,7 +8,7 @@ export const contractABI = [
     stateMutability: "nonpayable",
     type: "constructor",
   },
-  { inputs: [], name: "InsufficientFunding", type: "error" },
+  { inputs: [], name: "NoAvailableAmount", type: "error" },
   {
     inputs: [{ internalType: "address", name: "owner", type: "address" }],
     name: "OwnableInvalidOwner",
@@ -86,6 +86,20 @@ export const contractABI = [
     type: "function",
   },
   {
+    inputs: [{ internalType: "address", name: "", type: "address" }],
+    name: "funderToAmount",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    name: "funders",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "getFundersLength",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
@@ -96,6 +110,13 @@ export const contractABI = [
     inputs: [],
     name: "i_ethUsdPriceFeed",
     outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "", type: "address" }],
+    name: "isFunders",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
     stateMutability: "view",
     type: "function",
   },
@@ -111,27 +132,6 @@ export const contractABI = [
     name: "renounceOwnership",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "address", name: "", type: "address" }],
-    name: "s_funderToAmount",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    name: "s_funders",
-    outputs: [{ internalType: "address", name: "", type: "address" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "address", name: "", type: "address" }],
-    name: "s_isFunders",
-    outputs: [{ internalType: "bool", name: "", type: "bool" }],
-    stateMutability: "view",
     type: "function",
   },
   {
