@@ -64,7 +64,7 @@ const FundCard = ({ fetchContractData }: FundCradProps) => {
           <div className="space-x-2 flex ">
             <input
               placeholder="Amount"
-              className="border p-2 rounded-3xl text-sm"
+              className="border p-2 rounded-3xl text-sm "
               type="number"
               onChange={onInputAmountChange}
             />

@@ -15,9 +15,9 @@ import { useEffect, useState } from "react";
 import { MainLayout } from "./layouts/MainLayout";
 import Card from "./components/Card";
 import FundCard from "./components/FundCard";
-import { ExternalLink, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 import { FundedEvent } from "./lib/type";
-import { shortenAddress } from "./lib/utils";
+import LatestDonation from "./components/LatestDonation";
 
 // 1. Your Reown Cloud project ID
 const projectId = import.meta.env.VITE_WALLETCONNECT_ID;
@@ -144,48 +144,8 @@ function App() {
         </div>
         <FundCard fetchContractData={fetchContractData} />
       </div>
-      <div className="mt-6 pt-6 border-t space-y-2">
-        <h2 className="text-lg font-semibold text-lime-950 ">
-          Latest Donation
-        </h2>
-        {isLoading && <LoaderCircle className="animate-spin" />}
-        {!isLoading &&
-          historyEvent?.length !== 0 &&
-          historyEvent?.map((item) => (
-            <>
-              <Card
-                key={item.txHash}
-                className="shadow-none flex justify-between gap-2 text-center hover:shadow transition-all"
-              >
-                <div>
-                  <p className="text-sm font-semibold">Funder</p>
-                  <a
-                    href={`https://sepolia.etherscan.io/address/${item.funder}`}
-                    target="_blank"
-                    className="hover:underline text-blue-900 flex items-center gap-2"
-                  >
-                    {shortenAddress(item.funder)}
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                </div>
-                <div>
-                  <p className="text-sm font-semibold">Value</p>
-                  <p>{item.value} ETH</p>
-                </div>
-                <div>
-                  <p className="text-sm font-semibold">TxHash</p>
-                  <a
-                    href={`https://sepolia.etherscan.io/tx/${item.txHash}`}
-                    target="_blank"
-                    className="hover:underline  text-blue-900 flex items-center gap-2"
-                  >
-                    {shortenAddress(item.txHash)}
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                </div>
-              </Card>
-            </>
-          ))}
+      <div>
+        <LatestDonation isLoading={isLoading} historyEvent={historyEvent} />
       </div>
     </MainLayout>
   );
